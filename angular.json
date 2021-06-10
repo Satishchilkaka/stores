@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "e-store",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
+    }
+  },
+  "projects": {
+    "e-store": {
+      "projectType": "application",
+      "root": "apps/e-store",
+      "sourceRoot": "apps/e-store/src",
+      "prefix": "stores",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/e-store",
+            "index": "apps/e-store/src/index.html",
+            "main": "apps/e-store/src/main.ts",
+            "polyfills": "apps/e-store/src/polyfills.ts",
+            "tsConfig": "apps/e-store/tsconfig.app.json",
+            "assets": [
+              "apps/e-store/src/favicon.ico",
+              "apps/e-store/src/assets"
+            ],
+            "styles": ["apps/e-store/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/e-store/src/environments/environment.ts",
+                  "with": "apps/e-store/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "e-store:build:production"
+            },
+            "development": {
+              "browserTarget": "e-store:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "e-store:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/e-store/src/**/*.ts",
+              "apps/e-store/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/e-store"],
+          "options": {
+            "jestConfig": "apps/e-store/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "e-store-e2e": {
+      "root": "apps/e-store-e2e",
+      "sourceRoot": "apps/e-store-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/e-store-e2e/cypress.json",
+            "tsConfig": "apps/e-store-e2e/tsconfig.e2e.json",
+            "devServerTarget": "e-store:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "e-store:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/e-store-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
