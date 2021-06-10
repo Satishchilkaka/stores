@@ -52,3 +52,4 @@ serviceAccount.json
 serviceAccount1.json
 node_modules
 fire-functions/functions/index.html
+apps/e-store/src/environments
