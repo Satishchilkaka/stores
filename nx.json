@@ -25,6 +25,13 @@
     "e-store-e2e": {
       "tags": [],
       "implicitDependencies": ["e-store"]
+    },
+    "webapp": {
+      "tags": []
+    },
+    "webapp-e2e": {
+      "tags": [],
+      "implicitDependencies": ["webapp"]
     }
   }
 }
