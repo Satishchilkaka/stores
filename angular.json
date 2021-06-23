@@ -50,7 +50,9 @@
               "apps/e-store/src/favicon.ico",
               "apps/e-store/src/assets"
             ],
-            "styles": ["apps/e-store/src/styles.css"],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
+              "apps/e-store/src/styles.css"],
             "scripts": []
           },
           "configurations": {
