@@ -6,6 +6,8 @@ import { AppComponent } from "./app.component";
 import { RouterModule } from "@angular/router";
 import { ServerComponent } from "./server/server.component";
 import { ServersComponent } from './servers/servers.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -14,6 +16,9 @@ import { ServersComponent } from './servers/servers.component';
   imports: [
     BrowserModule,
     FormsModule,
+    MatInputModule,
+    MatInputModule,
+    MatFormFieldModule,
     RouterModule.forRoot([], { initialNavigation: "enabled" }),
   ],
   providers: [],
